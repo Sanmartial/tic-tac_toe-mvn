@@ -19,27 +19,26 @@ public class DataPrinter {
     };
 
     public void printMappingTable() {
-        for (int i = 0; i < numbers[0].length; i++) {
-            System.out.println(lineHor);
-            System.out.print(lineVertical + " ");
-            for (int j = 0; j < numbers[0].length; j++) {
-                System.out.print(cellNumberConverter.toNumber(new Cell(i, j)) + " " + lineVertical + " ");
-            }
-            System.out.println();
-        }
-        System.out.println(lineHor);
+        print((i, j) -> String.valueOf(cellNumberConverter.toNumber(new Cell(i, j))));
 
     }
 
     public void printGameTable(GameTable gameTable) {
+        print((i, j) -> String.valueOf(gameTable.getSign(new Cell(i, j))));
+    }
 
+    private void print(Lambda lambda) {
         for (int i = 0; i < 3; i++) {
             System.out.println(lineHor);
             for (int j = 0; j < 3; j++) {
-                System.out.print(lineVertical + " " + gameTable.getSign(new Cell(i, j)) + " ");
+                System.out.print(lineVertical + " " + lambda.getValue(i, j) + " ");
             }
             System.out.println(lineVertical);
         }
         System.out.println(lineHor);
+    }
+
+    private interface Lambda {
+        String getValue(int i, int j);
     }
 }
