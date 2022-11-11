@@ -3,7 +3,7 @@ package component;
 
 import model.Cell;
 import model.GameTable;
-
+import static component.Sign.O;
 import java.util.Random;
 
 public class ComputerMove {
@@ -13,7 +13,7 @@ public class ComputerMove {
             final int numberCol = new Random().nextInt(3);
             final Cell cell = new Cell(numberCol, numberRow);
             if (gameTable.isEmpty(cell)) {
-                gameTable.setSign(cell, '0');
+                gameTable.setSign(cell, O);
                 return;
             }
         }

@@ -1,23 +1,27 @@
 package model;
 
+import component.Sign;
+
 import java.util.Arrays;
 
+import static component.Sign.EMPTY;
+
 public class GameTable {
-    private final char[][] table = {
-            {' ', ' ', ' '},
-            {' ', ' ', ' '},
-            {' ', ' ', ' '}
+    private final Sign[][] table = {
+            {EMPTY, EMPTY, EMPTY},
+            {EMPTY, EMPTY, EMPTY},
+            {EMPTY, EMPTY, EMPTY}
     };
 
     public boolean isEmpty(final Cell cell) { //check cell is empty
-        return table[cell.getRow()][cell.getCol()] == ' ';
+        return table[cell.getRow()][cell.getCol()] == EMPTY;
     }
 
-    public char getSign(final Cell cell) { // get content cell
+    public Sign getSign(final Cell cell) { // get content cell
         return table[cell.getRow()][cell.getCol()];
     }
 
-    public void setSign(final Cell cell, final char sign) { // set cell
+    public void setSign(final Cell cell, final Sign sign) { // set cell
         table[cell.getRow()][cell.getCol()] = sign;
     }
 
