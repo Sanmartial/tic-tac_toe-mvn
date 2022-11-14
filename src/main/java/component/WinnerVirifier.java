@@ -7,15 +7,8 @@ import model.GameTable;
 import static component.Sign.O;
 import static component.Sign.X;
 public class WinnerVirifier {
-    public boolean isUserWin(GameTable gameTable) {
-        return isWinner(gameTable, X);
-    }
 
-    public boolean isComputerWin(GameTable gameTable) {
-        return isWinner(gameTable, O);
-    }
-
-    private boolean isWinner(GameTable gameTable, Sign c) {
+    public boolean isWinner(GameTable gameTable, Sign c) {
         if (gameTable.getSign(new Cell(0, 0)) == c && gameTable.getSign(new Cell(0, 1)) == c && gameTable.getSign(new Cell(0, 2)) == c)
             return true;
         if (gameTable.getSign(new Cell(1, 0)) == c && gameTable.getSign(new Cell(1, 1)) == c && gameTable.getSign(new Cell(1, 2)) == c)

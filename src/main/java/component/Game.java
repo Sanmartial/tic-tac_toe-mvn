@@ -1,12 +1,17 @@
 package component;
+
 import model.GameTable;
+import model.Player;
+
 import java.util.Random;
+
 public class Game {
     private final DataPrinter dataPrinter;
     private final ComputerMove computerMove;
     private final UserMove userMove;
     private final WinnerVirifier winnerVirifier;
     private final CellVerifier cellVerifier;
+
     public Game(final DataPrinter dataPrinter,
                 final ComputerMove computerMove,
                 final UserMove userMove,
@@ -18,45 +23,37 @@ public class Game {
         this.winnerVirifier = winnerVirifier;
         this.cellVerifier = cellVerifier;
     }
+
     public void play() {
         System.out.println("Use the following mapping table to specify a cell using numbers from 1 to 9");
         dataPrinter.printMappingTable(); //display the grid on the monitor
         final GameTable gameTable = new GameTable(); // object game field
-        if (new Random().nextBoolean()) { //determining who takes the next step
-            computerMove.make(gameTable); // if True the next step does computer
-            dataPrinter.printGameTable(gameTable); //display current gaming field
-        }
+//        if (new Random().nextBoolean()) { //determining who takes the next step
+//            computerMove.make(gameTable); // if True the next step does computer
+//            dataPrinter.printGameTable(gameTable); //display current gaming field
+//        }
 
-        final Move[] moves = {userMove, computerMove};
-
+        final Player[] players = new Player[]{new Player(Sign.X, userMove), new Player(Sign.O, computerMove)};
         while (true) {
-           
-            for (final Move move : moves) {
-                move.make(gameTable);
+
+            for (final Player player : players) {
+                player.makeMove(gameTable);
                 dataPrinter.printGameTable(gameTable);
-                if (move instanceof UserMove) {
-                    if (winnerVirifier.isUserWin(gameTable)) { //check the user won
-                        System.out.println("YOU WIN");
-                        printGameOver();
-                        return;
-                    }
-                } else {
-                    if (winnerVirifier.isComputerWin(gameTable)) { //check the user won
-                        System.out.println("Computer WIN");
-                        printGameOver();
-                        return;
-                    }
+
+                if (winnerVirifier.isWinner(gameTable, player.getSign())) { //check the user won
+                    System.out.println(player + " WIN");
+                    printGameOver();
+                    return;
+                }
+
+                if (cellVerifier.allCellFilled(gameTable)) { //check the draw
+                    System.out.println("SORRY, DRAW");
+                    printGameOver();
+                    return;
                 }
             }
-
-            if (cellVerifier.allCellFilled(gameTable)) { //check the draw
-                System.out.println("SORRY, DRAW");
-                printGameOver();
-                return;
-            }
-
         }
-     }
+    }
 
     private static void printGameOver() {
         System.out.println("GAME OVER");
