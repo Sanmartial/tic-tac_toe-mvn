@@ -30,34 +30,35 @@ public class Game {
         final Move[] moves = {userMove, computerMove};
 
         while (true) {
-            boolean gamaOver = false;
+           
             for (final Move move : moves) {
                 move.make(gameTable);
                 dataPrinter.printGameTable(gameTable);
                 if (move instanceof UserMove) {
                     if (winnerVirifier.isUserWin(gameTable)) { //check the user won
                         System.out.println("YOU WIN");
-                        gamaOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 } else {
                     if (winnerVirifier.isComputerWin(gameTable)) { //check the user won
                         System.out.println("Computer WIN");
-                        gamaOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 }
             }
 
             if (cellVerifier.allCellFilled(gameTable)) { //check the draw
                 System.out.println("SORRY, DRAW");
-                gamaOver = true;
-                break;
+                printGameOver();
+                return;
             }
-            if (gamaOver) {
-                break;
-            }
+
         }
-       System.out.println("GAME OVER");
+     }
+
+    private static void printGameOver() {
+        System.out.println("GAME OVER");
     }
 }
