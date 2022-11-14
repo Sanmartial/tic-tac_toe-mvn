@@ -1,18 +1,12 @@
 package component;
-
-
 import model.GameTable;
-
 import java.util.Random;
-
 public class Game {
-
     private final DataPrinter dataPrinter;
     private final ComputerMove computerMove;
     private final UserMove userMove;
     private final WinnerVirifier winnerVirifier;
     private final CellVerifier cellVerifier;
-
     public Game(final DataPrinter dataPrinter,
                 final ComputerMove computerMove,
                 final UserMove userMove,
@@ -24,7 +18,6 @@ public class Game {
         this.winnerVirifier = winnerVirifier;
         this.cellVerifier = cellVerifier;
     }
-
     public void play() {
         System.out.println("Use the following mapping table to specify a cell using numbers from 1 to 9");
         dataPrinter.printMappingTable(); //display the grid on the monitor
@@ -34,32 +27,37 @@ public class Game {
             dataPrinter.printGameTable(gameTable); //display current gaming field
         }
 
+        final Move[] moves = {userMove, computerMove};
+
         while (true) {
-            userMove.make(gameTable); // the user takes a step
-            dataPrinter.printGameTable(gameTable); //display current gaming field
-            if (winnerVirifier.isUserWin(gameTable)) { //check the user won
-                System.out.println("YOU WIN");
-                break;
-            }
-            if (cellVerifier.allCellFilled(gameTable)) { //check the draw
-                System.out.println("SORRY, DRAW");
-                break;
-            }
-
-            // if True the next step does computer
-            computerMove.make(gameTable);
-            dataPrinter.printGameTable(gameTable); //display current gaming field
-            if (winnerVirifier.isComputerWin(gameTable)) { //check the user won
-                System.out.println("Computer WIN");
-                break;
-            }
-            if (cellVerifier.allCellFilled(gameTable)) { //check the draw
-                System.out.println("SORRY, DRAW");
-                break;
+            boolean gamaOver = false;
+            for (final Move move : moves) {
+                move.make(gameTable);
+                dataPrinter.printGameTable(gameTable);
+                if (move instanceof UserMove) {
+                    if (winnerVirifier.isUserWin(gameTable)) { //check the user won
+                        System.out.println("YOU WIN");
+                        gamaOver = true;
+                        break;
+                    }
+                } else {
+                    if (winnerVirifier.isComputerWin(gameTable)) { //check the user won
+                        System.out.println("Computer WIN");
+                        gamaOver = true;
+                        break;
+                    }
+                }
             }
 
+            if (cellVerifier.allCellFilled(gameTable)) { //check the draw
+                System.out.println("SORRY, DRAW");
+                gamaOver = true;
+                break;
+            }
+            if (gamaOver) {
+                break;
+            }
         }
-        System.out.println("GAME OVER");
-
+       System.out.println("GAME OVER");
     }
 }

@@ -6,7 +6,7 @@ import model.GameTable;
 import static component.Sign.X;
 import java.util.Scanner;
 
-public class UserMove {
+public class UserMove implements Move {
     private final CellNumberConverter cellNumberConverter;
 
     public UserMove(CellNumberConverter cellNumberConverter) {

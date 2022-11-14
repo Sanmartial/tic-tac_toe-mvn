@@ -6,7 +6,7 @@ import model.GameTable;
 import static component.Sign.O;
 import java.util.Random;
 
-public class ComputerMove {
+public class ComputerMove implements Move {
     public void make(GameTable gameTable) {
         while (true) {
             final int numberRow = new Random().nextInt(3);
