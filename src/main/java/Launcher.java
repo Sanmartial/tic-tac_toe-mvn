@@ -4,14 +4,8 @@ import model.Player;
 
 public final class Launcher {
     public static void main(String[] args) {
-        final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
-
-        final Game game = new Game(
-                new DataPrinter(cellNumberConverter),
-                new Player(Sign.X, new UserMove(cellNumberConverter)),
-                new Player(Sign.O, new ComputerMove()),
-                new WinnerVirifier(),
-                new CellVerifier(), false);
+        final GameFactory gameFactory = new GameFactory(args);
+        final Game game = gameFactory.create();
         game.play();
     }
 
