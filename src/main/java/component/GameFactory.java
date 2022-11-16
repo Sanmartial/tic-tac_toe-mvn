@@ -3,6 +3,7 @@ package component;
 import component.console.ConsoleDataPrinter;
 import component.console.ConsoleUserInputReader;
 import component.keypad.TerminalNumericKeypadCellNumberConverter;
+import component.swing.GameWindow;
 import model.Player;
 import model.PlayerType;
 
@@ -21,10 +22,11 @@ public class GameFactory {
     }
 
     public Game create() {
-        final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+        final GameWindow gameWindow = new GameWindow();
+        //final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+        final DataPrinter dataPrinter = gameWindow; //new ConsoleDataPrinter(cellNumberConverter);
+        final UserInputReader userInputReader = gameWindow; //new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
         final Player player1;
-        final DataPrinter dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
-        final UserInputReader userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
         if (player1Type == USER) {
             player1 = new Player(Sign.X, new UserMove(userInputReader, dataPrinter));
         } else {
