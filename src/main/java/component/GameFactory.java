@@ -4,7 +4,6 @@ import component.keypad.TerminalNumericKeypadCellNumberConverter;
 import model.Player;
 import model.PlayerType;
 
-import static model.PlayerType.COMPUTER;
 import static model.PlayerType.USER;
 
 public class GameFactory {
@@ -38,7 +37,7 @@ public class GameFactory {
         }
         final boolean canSecondPlayerMakeFirstMove = player1Type != player2Type;
         return new Game(
-                new DataPrinter(cellNumberConverter),
+                new DataPrinterImpl(cellNumberConverter),
                 player1,
                 player2,
                 new WinnerVirifier(),
