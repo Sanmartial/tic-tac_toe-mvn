@@ -2,7 +2,6 @@ package component.console;
 
 import component.CellNumberConverter;
 import component.DataPrinter;
-import component.DataPrinterImpl;
 import model.Cell;
 import model.GameTable;
 
