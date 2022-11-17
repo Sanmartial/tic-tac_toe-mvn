@@ -1,6 +1,6 @@
 package component;
 
-import model.Cell;
+import model.game.Cell;
 
 public interface UserInputReader {
     Cell getUserInput();

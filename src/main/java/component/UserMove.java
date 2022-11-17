@@ -1,24 +1,17 @@
 package component;
 
-import model.Cell;
-import model.GameTable;
+import model.game.Cell;
+import model.game.GameTable;
 
 
 public class UserMove implements Move {
 
 private final UserInputReader userInputReader;
 private final DataPrinter dataPrinter;
-    private final int[][] numbers = {
-            {7, 8, 9},
-            {4, 5, 6},
-            {1, 2, 3}
-    };
-
     public UserMove(UserInputReader userInputReader, DataPrinter dataPrinter) {
         this.userInputReader = userInputReader;
         this.dataPrinter = dataPrinter;
     }
-
     public void make(GameTable gameTable, final Sign sign) {
         while (true) {
             final Cell cell = userInputReader.getUserInput();

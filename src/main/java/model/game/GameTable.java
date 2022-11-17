@@ -1,6 +1,7 @@
-package model;
+package model.game;
 
 import component.Sign;
+import model.game.Cell;
 
 import java.util.Arrays;
 
@@ -14,15 +15,15 @@ public class GameTable {
     };
 
     public boolean isEmpty(final Cell cell) { //check cell is empty
-        return table[cell.getRow()][cell.getCol()] == EMPTY;
+        return table[cell.row()][cell.col()] == EMPTY;
     }
 
     public Sign getSign(final Cell cell) { // get content cell
-        return table[cell.getRow()][cell.getCol()];
+        return table[cell.row()][cell.col()];
     }
 
     public void setSign(final Cell cell, final Sign sign) { // set cell
-        table[cell.getRow()][cell.getCol()] = sign;
+        table[cell.row()][cell.col()] = sign;
     }
 
     @Override

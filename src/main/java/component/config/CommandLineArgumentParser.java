@@ -1,41 +1,39 @@
-package component;
+package component.config;
 
-import model.PlayerType;
-import model.UserInterface;
-
-import static model.PlayerType.COMPUTER;
-import static model.PlayerType.USER;
-import static model.UserInterface.CONSOLE;
-import static model.UserInterface.GUI;
+import model.config.PlayerType;
+import model.config.UserInterface;
+import static model.config.PlayerType.COMPUTER;
+import static model.config.PlayerType.USER;
+import static model.config.UserInterface.CONSOLE;
+import static model.config.UserInterface.GUI;
 
 public class CommandLineArgumentParser {
     private final String[] args;
-
     public CommandLineArgumentParser(String[] args) {
         this.args = args;
     }
 
-    CommandLineArgument parse() {
+    public CommandLineArgument parse() {
         PlayerType player1Type = null;
         PlayerType player2Type = null;
         UserInterface userInterface = null;
 
-        for (int i = 0; i < args.length; i++) {
-            if (USER.name().equalsIgnoreCase(args[i]) || COMPUTER.name().equalsIgnoreCase(args[i])) {
+        for (String arg : args) {
+            if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
                 if (player1Type == null) {
-                    player1Type = PlayerType.valueOf(args[i].toUpperCase());
+                    player1Type = PlayerType.valueOf(arg.toUpperCase());
                 } else if (player2Type == null) {
-                    player2Type = PlayerType.valueOf(args[i].toUpperCase());
+                    player2Type = PlayerType.valueOf(arg.toUpperCase());
                 } else {
-                    System.err.println("Unsupported command line command: " + args[i]);
+                    System.err.println("Unsupported command line command: " + arg);
                 }
             }
-            if (GUI.name().equalsIgnoreCase(args[i]) || CONSOLE.name().equalsIgnoreCase(args[i])) {
+            if (GUI.name().equalsIgnoreCase(arg) || CONSOLE.name().equalsIgnoreCase(arg)) {
                 if (userInterface == null) {
-                    userInterface = userInterface.valueOf(args[i].toUpperCase());
+                    userInterface = userInterface.valueOf(arg.toUpperCase());
                 }
             } else {
-                System.err.println("Unsupported command line command: " + args[i]);
+                System.err.println("Unsupported command line command: " + arg);
             }
         }
         if (userInterface == null) {
@@ -48,7 +46,6 @@ public class CommandLineArgumentParser {
         } else {
             return new CommandLineArgument(player1Type, player2Type, userInterface);
         }
-
     }
 
     public static class CommandLineArgument {

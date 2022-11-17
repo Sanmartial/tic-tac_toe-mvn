@@ -1,6 +1,4 @@
 import component.*;
-import component.keypad.TerminalNumericKeypadCellNumberConverter;
-import model.Player;
 
 public final class Launcher {
     public static void main(String[] args) {

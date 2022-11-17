@@ -1,14 +1,10 @@
-package component;
+package component.console;
 
 
-import model.Cell;
+import model.game.Cell;
 
 public interface CellNumberConverter {
-
-
     Cell toCell(int number);
-
-
     int toNumber(Cell cell);
 
 }

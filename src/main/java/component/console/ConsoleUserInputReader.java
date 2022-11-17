@@ -1,9 +1,8 @@
 package component.console;
 
-import component.CellNumberConverter;
 import component.DataPrinter;
 import component.UserInputReader;
-import model.Cell;
+import model.game.Cell;
 
 import java.util.Scanner;
 

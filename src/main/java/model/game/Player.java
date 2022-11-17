@@ -1,7 +1,8 @@
-package model;
+package model.game;
 
 import component.Move;
 import component.Sign;
+import model.game.GameTable;
 
 public final class Player {
     private final Sign sign;

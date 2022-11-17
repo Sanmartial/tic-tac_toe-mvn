@@ -1,15 +1,13 @@
-package component.keypad;
+package component.console.keypad;
 
+import component.console.CellNumberConverter;
+import model.game.Cell;
 
-import component.CellNumberConverter;
-import model.Cell;
-
-public class DescktopNumericKKeypadCellNumberConverter implements CellNumberConverter {
-
+public class TerminalNumericKeypadCellNumberConverter implements CellNumberConverter {
     private final int[][] numbers = {
-            {7, 8, 9},
+            {1, 2, 3},
             {4, 5, 6},
-            {1, 2, 3}
+            {7, 8, 9}
     };
 
     @Override
@@ -27,6 +25,6 @@ public class DescktopNumericKKeypadCellNumberConverter implements CellNumberConv
 
     @Override
     public int toNumber(final Cell cell) {
-        return numbers[cell.getRow()][cell.getCol()];
+        return numbers[cell.row()][cell.col()];
     }
 }

@@ -1,9 +1,7 @@
 package component;
 
-
-import model.Cell;
-import model.GameTable;
-import static component.Sign.O;
+import model.game.Cell;
+import model.game.GameTable;
 import java.util.Random;
 
 public class ComputerMove implements Move {

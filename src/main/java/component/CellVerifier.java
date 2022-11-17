@@ -1,15 +1,12 @@
 package component;
 
 
-import model.Cell;
-import model.GameTable;
+import model.game.Cell;
+import model.game.GameTable;
 
 public class CellVerifier {
     public boolean allCellFilled(GameTable gameTable) {
-        if (!isNotEmpty(gameTable))
-            return true;
-        else
-            return false;
+        return !isNotEmpty(gameTable);
     }
 
 

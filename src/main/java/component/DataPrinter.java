@@ -1,11 +1,10 @@
 package component;
 
-import model.GameTable;
+import model.game.GameTable;
 
 public interface DataPrinter {
+    void printInstruction();
     void printInfoMessage(String message);
-
     void printErrorMessage(String message);
-    void printMappingTable();
     void printGameTable(final GameTable gameTable);
 }

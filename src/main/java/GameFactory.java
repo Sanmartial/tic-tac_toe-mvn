@@ -1,15 +1,17 @@
-package component;
-
+import component.*;
+import component.config.CommandLineArgumentParser;
+import component.console.CellNumberConverter;
 import component.console.ConsoleDataPrinter;
+import component.console.ConsoleGameOverHandler;
 import component.console.ConsoleUserInputReader;
-import component.keypad.TerminalNumericKeypadCellNumberConverter;
+import component.console.keypad.TerminalNumericKeypadCellNumberConverter;
 import component.swing.GameWindow;
-import model.Player;
-import model.PlayerType;
-import model.UserInterface;
+import model.game.Player;
+import model.config.PlayerType;
+import model.config.UserInterface;
 
-import static model.PlayerType.USER;
-import static model.UserInterface.GUI;
+import static model.config.PlayerType.USER;
+import static model.config.UserInterface.GUI;
 
 public class GameFactory {
     private final PlayerType player1Type;
@@ -25,18 +27,19 @@ public class GameFactory {
     }
 
     public Game create() {
-        //final GameWindow gameWindow = new GameWindow();
-        //final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
         final DataPrinter dataPrinter;
         final UserInputReader userInputReader;
+        final GameOverHandler gameOverHandler;
         if(userInterface == GUI){
             final GameWindow gameWindow = new GameWindow();
             dataPrinter = gameWindow;
             userInputReader = gameWindow;
+            gameOverHandler = gameWindow;
         } else {
             final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
             dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
-            userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);;
+            userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+            gameOverHandler = new ConsoleGameOverHandler(dataPrinter);
         }
 
         final Player player1;
@@ -53,12 +56,11 @@ public class GameFactory {
         } else {
             player2 = new Player(Sign.O, new ComputerMove());
         }
-        final boolean canSecondPlayerMakeFirstMove = player1Type != player2Type;
-        return new Game(
+            return new Game(
                 dataPrinter,
                 player1,
                 player2,
                 new WinnerVirifier(),
-                new CellVerifier(), false);
+                new CellVerifier(), gameOverHandler, false);
     }
 }

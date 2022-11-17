@@ -1,11 +1,9 @@
 package component;
 
 
-import model.Cell;
-import model.GameTable;
+import model.game.Cell;
+import model.game.GameTable;
 
-import static component.Sign.O;
-import static component.Sign.X;
 public class WinnerVirifier {
 
     public boolean isWinner(GameTable gameTable, Sign c) {

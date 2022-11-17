@@ -1,6 +1,6 @@
 package component;
 
-import model.GameTable;
+import model.game.GameTable;
 
 public interface Move {
     void make(GameTable gameTable, Sign sign);

@@ -1,9 +1,10 @@
 package component.swing;
 
 import component.DataPrinter;
+import component.GameOverHandler;
 import component.UserInputReader;
-import model.Cell;
-import model.GameTable;
+import model.game.Cell;
+import model.game.GameTable;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,13 +22,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
-public class GameWindow extends JFrame implements DataPrinter, UserInputReader {
+public class GameWindow extends JFrame implements DataPrinter, UserInputReader, GameOverHandler {
     private static final int GAME_TABLE_SIZE = 3;//ячейки
-
     private static final int FONT_SIZE = 50;
-
     private static final int CELL_SIZE = 100;
-
     private final JLabel[][] cells = new JLabel[GAME_TABLE_SIZE][GAME_TABLE_SIZE];//создаем ячейки
     private Cell clickedCell;
 
@@ -40,6 +38,10 @@ public class GameWindow extends JFrame implements DataPrinter, UserInputReader {
         setResizable(false);
         pack();
         displayInTheMiddleOfTheScreen();
+    }
+    @Override
+    public void printInstruction() {
+
     }
     private void setSystemLookAndFeel() {
         try {
@@ -80,7 +82,6 @@ public class GameWindow extends JFrame implements DataPrinter, UserInputReader {
         setVisible(true);
     } //отображение игрового окна по центру
 
-
     @Override
     public void printInfoMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -89,11 +90,6 @@ public class GameWindow extends JFrame implements DataPrinter, UserInputReader {
     @Override
     public void printErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    @Override
-    public void printMappingTable() {
-// do nothing
     }
 
     @Override
@@ -118,8 +114,9 @@ public class GameWindow extends JFrame implements DataPrinter, UserInputReader {
         return clickedCell;
     }
 
-//    public static void main(String[] args) {
-//        new GameWindow();
-//    }
+    @Override
+    public void gameOver() {
+        System.exit(0);
     }
+}
 
